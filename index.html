@@ -1,0 +1,83 @@
+<html>
+<style>
+body {
+    margin: 0;
+    font-family: monospace;
+}
+canvas {
+    display: block;
+    background-color: rgb(64, 64, 64);
+    width: 100vw;
+    height: 100vh;
+}
+</style>
+<body><canvas id="c"></canvas></body>
+<script src="twgl-full.min.js"></script>
+<script id="vs" type="notjs">
+attribute vec4 position;
+
+uniform float scale;
+uniform vec3 translate;
+
+void main() {
+  gl_Position = vec4(translate + position.xyz * scale, 1.0);
+}
+</script>
+<script id="fs" type="notjs">
+precision mediump float;
+
+uniform vec3 color;
+
+void main() {
+    gl_FragColor = vec4(color, 1.0);
+}
+</script>
+<script src="ghost.js"></script>
+<script src="pacman.js"></script>
+<script>
+const gl = document.getElementById("c").getContext("webgl");
+const programInfo = twgl.createProgramInfo(gl, ["vs", "fs"]);
+
+const ghost_buffer = ghost_generate(gl, twgl);
+const pacman_buffer = pacman_generate(gl, twgl);
+
+twgl.resizeCanvasToDisplaySize(gl.canvas);
+gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+
+gl.useProgram(programInfo.program);
+
+
+var uniforms = {
+    scale: 0.25,
+    translate: [0.5, 0, 0],
+    color: [1, 0, 1],
+};
+twgl.setBuffersAndAttributes(gl, programInfo, ghost_buffer);
+twgl.setUniforms(programInfo, uniforms);
+twgl.drawBufferInfo(gl, ghost_buffer);
+//gl.drawElements(gl.TRIANGLES, ghost_buffer.numElements, gl.UNSIGNED_SHORT, 0);
+
+var uniforms = {
+    scale: 0.25,
+    translate: [0.5, 0.5, 0],
+    color: [0, 1, 1],
+};
+twgl.setBuffersAndAttributes(gl, programInfo, ghost_buffer);
+twgl.setUniforms(programInfo, uniforms);
+twgl.drawBufferInfo(gl, ghost_buffer);
+//gl.drawElements(gl.TRIANGLES, ghost_buffer.numElements, gl.UNSIGNED_SHORT, 0);
+
+
+var uniforms = {
+    scale: 0.25,
+    translate: [-0.5, 0, 0],
+    color: [1, 1, 0],
+};
+twgl.setBuffersAndAttributes(gl, programInfo, pacman_buffer);
+twgl.setUniforms(programInfo, uniforms);
+twgl.drawBufferInfo(gl, pacman_buffer);
+
+</script>
+</html>
+
+
