@@ -13,9 +13,10 @@ canvas {
 </style>
 <body><canvas id="c"></canvas></body>
 <script src="twgl-full.min.js"></script>
-<script id="vs" type="notjs">
-attribute vec4 position;
 
+<script id="vs" type="notjs">
+//Declare the Variables for each entity
+attribute vec4 position;
 uniform float scale;
 uniform vec3 translate;
 
@@ -32,52 +33,109 @@ void main() {
     gl_FragColor = vec4(color, 1.0);
 }
 </script>
+
+<!-- Import The entities -->
 <script src="ghost.js"></script>
 <script src="pacman.js"></script>
+
+
+
+
+<!-- The Main Script goes here -->
 <script>
+//Initialize stuff
 const gl = document.getElementById("c").getContext("webgl");
 const programInfo = twgl.createProgramInfo(gl, ["vs", "fs"]);
-
-const ghost_buffer = ghost_generate(gl, twgl);
-const pacman_buffer = pacman_generate(gl, twgl);
-
 twgl.resizeCanvasToDisplaySize(gl.canvas);
 gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
-
 gl.useProgram(programInfo.program);
 
-
-var uniforms = {
-    scale: 0.25,
-    translate: [0.5, 0, 0],
-    color: [1, 0, 1],
+//Create the Entity Class
+class Entity {
+	constructor(pbuffer, pscale, ptranslate, pcolor) {
+		this.buffer = pbuffer;
+		this.uniforms = {
+			scale: pscale,
+			translate: ptranslate,
+			color: pcolor
+		}
+	}
+	
+	render() {
+		twgl.setBuffersAndAttributes(gl, programInfo, this.buffer);
+		twgl.setUniforms(programInfo, this.uniforms);
+		twgl.drawBufferInfo(gl, this.buffer);
+	}
 };
-twgl.setBuffersAndAttributes(gl, programInfo, ghost_buffer);
-twgl.setUniforms(programInfo, uniforms);
-twgl.drawBufferInfo(gl, ghost_buffer);
-//gl.drawElements(gl.TRIANGLES, ghost_buffer.numElements, gl.UNSIGNED_SHORT, 0);
 
-var uniforms = {
-    scale: 0.25,
-    translate: [0.5, 0.5, 0],
-    color: [0, 1, 1],
-};
-twgl.setBuffersAndAttributes(gl, programInfo, ghost_buffer);
-twgl.setUniforms(programInfo, uniforms);
-twgl.drawBufferInfo(gl, ghost_buffer);
-//gl.drawElements(gl.TRIANGLES, ghost_buffer.numElements, gl.UNSIGNED_SHORT, 0);
+//Finish Importing entities
+const ghost_buffer = ghost_generate(gl, twgl);
+Entities = [
+	//new Entity(pacman_generate(gl, twgl), .25, [-0.5, 0, 0], [1, 1, 0]),
+	new Entity(ghost_buffer, 0.25, [0, 0, 0], [1, 0, 1]),
+	new Entity(ghost_buffer, 0.25, [0, 0, 0], [0, 0, 1]),
+	new Entity(ghost_buffer, 0.25, [0, 0, 0], [0, 1, 1]),
+	new Entity(ghost_buffer, 0.25, [0, 0, 0], [0, 1, 0]),
+	new Entity(ghost_buffer, 0.25, [0, 0, 0], [1, 1, 0]),
+	new Entity(ghost_buffer, 0.25, [0, 0, 0], [1, 0, 0])
+];
 
+//Add Event Listeners
+keys = {};
+document.addEventListener('keydown', function(e) {
+	console.log("Diagnostic 3");
+	keys[e.code] = true;
+});
+document.addEventListener('keyup', function(e) {
+	keys[e.code] = false;
+});
 
-var uniforms = {
-    scale: 0.25,
-    translate: [-0.5, 0, 0],
-    color: [1, 1, 0],
-};
-twgl.setBuffersAndAttributes(gl, programInfo, pacman_buffer);
-twgl.setUniforms(programInfo, uniforms);
-twgl.drawBufferInfo(gl, pacman_buffer);
+//Start with the Actual Code
+function main_game_loop() {
+	update();
+	render();
+	requestAnimationFrame(main_game_loop);
+}
 
+//Update all of the User-Control Operations
+var controlIndex = Entities.length-1;
+function update() {
+	if (keys['ArrowDown']) {
+		Entities[controlIndex].uniforms.translate[1] -= 0.05;
+	}
+	if (keys['ArrowUp']) {
+		Entities[controlIndex].uniforms.translate[1] += 0.05;
+	}
+	if (keys['ArrowLeft']) {
+		Entities[controlIndex].uniforms.translate[0] -= 0.05;
+	}
+	if (keys['ArrowRight']) {
+		Entities[controlIndex].uniforms.translate[0] += 0.05;
+	}
+	if (keys['Space']) {
+		controlIndex -= 1;
+		if (controlIndex < 0) {
+			controlIndex = Entities.length - 1;
+		}
+		keys['Space'] = false;
+	}
+}
+
+//Render all Entities
+function render() {
+	Entities.forEach(function(item, index, array) {
+		item.render();
+	});
+}
+
+main_game_loop()
 </script>
 </html>
+
+<!--
+Blender createBuffer
+Importing Shaders
+-->
+
 
 
