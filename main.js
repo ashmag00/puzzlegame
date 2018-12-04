@@ -11,21 +11,47 @@ class Entity {
 		this.scale = pscale;
 		this.pos = ptranslate;
 		this.color = pcolor;
+		//this.rot_z = 0;
 	}
 	
-	render() {
-	
-		this.uniforms = {
+	render(pview_matrix, pproj_matrix) {
+		/*
+		var uniforms = {
+			scale: this.scale,
+			translate: this.pos,
+			color: this.color
+		}/**/
+		var uniforms = {
+			view_matrix: pview_matrix,
+			proj_matrix: pproj_matrix,
+			model_matrix: model_matrix(this),
+			color: this.color
+		}
+		
+		twgl.setBuffersAndAttributes(gl, programInfo, this.buffer);
+		twgl.setUniforms(programInfo, uniforms);
+		twgl.drawBufferInfo(gl, this.buffer);
+	}
+	/* Use instead of render for 2D (also adjust index.html file)
+	basicrender() {
+		var uniforms = {
 			scale: this.scale,
 			translate: this.pos,
 			color: this.color
 		}
 		
 		twgl.setBuffersAndAttributes(gl, programInfo, this.buffer);
-		twgl.setUniforms(programInfo, this.uniforms);
+		twgl.setUniforms(programInfo, uniforms);
 		twgl.drawBufferInfo(gl, this.buffer);
-	}
+	}/**/
 };
+
+function model_matrix(entity) {
+	var T = m4.translation(entity.pos[0], entity.pos[1], entity.pos[2]);
+	var S = m4.scaling(entity.scale, entity.scale, entity.scale);
+	var R = m4.zRotation(0);
+	return m4.multiply(T, m4.multiply(R, S));
+}
 
 //Finish Importing Entities
 const ghost_buffer = ghost_generate(gl, twgl);
@@ -59,7 +85,6 @@ camera_info = {
 	zFar: 100
 };
 	
-
 
 
 
@@ -102,16 +127,21 @@ function update() {
 function render() {
 	twgl.resizeCanvasToDisplaySize(gl.canvas);
 	gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+	
+	//Create the matrixes
+	const aspect = canvas.clientWidth / canvas.clientHeight;
+	const view_matrix = m4.inverse(m4.lookAt(camera_info.pos, camera_info.tar, camera_info.up));
+	const proj_matrix = m4.perspective(camera_info.fov, aspect, camera_info.zNear, camera_info.zFar);
+	
+	//What do these do?
 	gl.useProgram(programInfo.program);
+	gl.disable(gl.CULL_FACE);
 
-	//const aspect = canvas.clientWidth / canvas.clientHeight;
-	//const view_matrix = m4.inverse(m4.lookAt(camera_info.pos, camera_info.tar, camera_info.up));
-	//proj_matrix = m4.perspective(camera_info.fov, aspect, camera_info.zNear, camera_info.zFar);
-
-	Entities.forEach(function(item, index, array) {
-		item.render();
+	Entities.forEach(function(entity, index, array) {
+		entity.render(view_matrix, proj_matrix);
 	});
+	
 }
-
+/**/
 //Start everything.
 main_game_loop()

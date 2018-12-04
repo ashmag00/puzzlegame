@@ -20,12 +20,29 @@
 <script id="vs" type="notjs">
 	//Declare the Variables for each entity
 	attribute vec4 position;
+	
+	uniform mat4 model_matrix;
+	uniform mat4 view_matrix;
+	uniform mat4 proj_matrix;
+	void main() {
+		gl_Position = proj_matrix * view_matrix * model_matrix * position;
+	}
+	/*
+		position is the entity's position
+		model_matrix transforms the position with respect to the world
+		view_matrix transforms the position with respect to the camera
+		proj_matrix transforms it from 3D to 2D to project onto the camera
+	
+	/**/
+	/* This is the old, 2D modeling stuff
+	attribute vec4 position;
 	uniform float scale;
 	uniform vec3 translate;
 
 	void main() {
 	  gl_Position = vec4(translate + position.xyz * scale, 1.0);
-	}
+	}/**/
+	
 </script>
 <script id="fs" type="notjs">
 	precision mediump float;
@@ -48,6 +65,10 @@
 <!--
 Blender createBuffer
 Importing Shaders
+
+slides
+	projection
+	transformation
 -->
 
 
