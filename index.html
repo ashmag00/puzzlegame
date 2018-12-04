@@ -1,135 +1,48 @@
 <html>
+<!-- style and setup -->
 <style>
-body {
-    margin: 0;
-    font-family: monospace;
-}
-canvas {
-    display: block;
-    background-color: rgb(64, 64, 64);
-    width: 100vw;
-    height: 100vh;
-}
+	body {
+	    margin: 0;
+	    font-family: monospace;
+	}
+	canvas {
+	    display: block;
+	    background-color: rgb(64, 64, 64);
+	    width: 100vw;
+	    height: 100vh;
+	}
 </style>
 <body><canvas id="c"></canvas></body>
+<script src="m4.js"></script>
 <script src="twgl-full.min.js"></script>
 
+<!-- glsl shader code -->
 <script id="vs" type="notjs">
-//Declare the Variables for each entity
-attribute vec4 position;
-uniform float scale;
-uniform vec3 translate;
+	//Declare the Variables for each entity
+	attribute vec4 position;
+	uniform float scale;
+	uniform vec3 translate;
 
-void main() {
-  gl_Position = vec4(translate + position.xyz * scale, 1.0);
-}
+	void main() {
+	  gl_Position = vec4(translate + position.xyz * scale, 1.0);
+	}
 </script>
 <script id="fs" type="notjs">
-precision mediump float;
+	precision mediump float;
 
-uniform vec3 color;
+	uniform vec3 color;
 
-void main() {
-    gl_FragColor = vec4(color, 1.0);
-}
+	void main() {
+	    gl_FragColor = vec4(color, 1.0);
+	}
 </script>
 
-<!-- Import The entities -->
+<!-- import entity models -->
 <script src="ghost.js"></script>
 <script src="pacman.js"></script>
 
-
-
-
-<!-- The Main Script goes here -->
-<script>
-//Initialize stuff
-const gl = document.getElementById("c").getContext("webgl");
-const programInfo = twgl.createProgramInfo(gl, ["vs", "fs"]);
-twgl.resizeCanvasToDisplaySize(gl.canvas);
-gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
-gl.useProgram(programInfo.program);
-
-//Create the Entity Class
-class Entity {
-	constructor(pbuffer, pscale, ptranslate, pcolor) {
-		this.buffer = pbuffer;
-		this.uniforms = {
-			scale: pscale,
-			translate: ptranslate,
-			color: pcolor
-		}
-	}
-	
-	render() {
-		twgl.setBuffersAndAttributes(gl, programInfo, this.buffer);
-		twgl.setUniforms(programInfo, this.uniforms);
-		twgl.drawBufferInfo(gl, this.buffer);
-	}
-};
-
-//Finish Importing entities
-const ghost_buffer = ghost_generate(gl, twgl);
-Entities = [
-	//new Entity(pacman_generate(gl, twgl), .25, [-0.5, 0, 0], [1, 1, 0]),
-	new Entity(ghost_buffer, 0.25, [0, 0, 0], [1, 0, 1]),
-	new Entity(ghost_buffer, 0.25, [0, 0, 0], [0, 0, 1]),
-	new Entity(ghost_buffer, 0.25, [0, 0, 0], [0, 1, 1]),
-	new Entity(ghost_buffer, 0.25, [0, 0, 0], [0, 1, 0]),
-	new Entity(ghost_buffer, 0.25, [0, 0, 0], [1, 1, 0]),
-	new Entity(ghost_buffer, 0.25, [0, 0, 0], [1, 0, 0])
-];
-
-//Add Event Listeners
-keys = {};
-document.addEventListener('keydown', function(e) {
-	console.log("Diagnostic 3");
-	keys[e.code] = true;
-});
-document.addEventListener('keyup', function(e) {
-	keys[e.code] = false;
-});
-
-//Start with the Actual Code
-function main_game_loop() {
-	update();
-	render();
-	requestAnimationFrame(main_game_loop);
-}
-
-//Update all of the User-Control Operations
-var controlIndex = Entities.length-1;
-function update() {
-	if (keys['ArrowDown']) {
-		Entities[controlIndex].uniforms.translate[1] -= 0.05;
-	}
-	if (keys['ArrowUp']) {
-		Entities[controlIndex].uniforms.translate[1] += 0.05;
-	}
-	if (keys['ArrowLeft']) {
-		Entities[controlIndex].uniforms.translate[0] -= 0.05;
-	}
-	if (keys['ArrowRight']) {
-		Entities[controlIndex].uniforms.translate[0] += 0.05;
-	}
-	if (keys['Space']) {
-		controlIndex -= 1;
-		if (controlIndex < 0) {
-			controlIndex = Entities.length - 1;
-		}
-		keys['Space'] = false;
-	}
-}
-
-//Render all Entities
-function render() {
-	Entities.forEach(function(item, index, array) {
-		item.render();
-	});
-}
-
-main_game_loop()
-</script>
+<!-- game script -->
+<script src="main.js"></script>
 </html>
 
 <!--
