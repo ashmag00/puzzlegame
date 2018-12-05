@@ -90,7 +90,7 @@ document.addEventListener('keyup', function(e) {
 var controlIndex = Entities.length-1;
 camera_info = {
 	pos: [0,0,0],
-	tar: [0,0,0],
+	tar: [0,0,5],
 	up: [0,1,0],
 	fov: 60 * 3.14 / 180,
 	zNear: 0.1,
@@ -109,6 +109,14 @@ function main_game_loop() {
 
 //Update all of the User-Control Operations
 function update() {
+	
+	if (keys['ArrowLeft']) {
+		camera_info.tar[0] += 0.05;
+	}
+	if (keys['ArrowRight']) {
+		camera_info.tar[0] -= 0.05;
+	}
+	/*
 	if (keys['ArrowUp']) {
 		Entities[controlIndex].pos[1] += 0.05;
 	}
@@ -141,19 +149,20 @@ function update() {
 		Entities[controlIndex].rot[0] -= 9;
 	}
 	
-	
+	/*
 	if (keys['Space']) {
 		controlIndex -= 1;
 		if (controlIndex < 0) {
 			controlIndex = Entities.length - 1;
 		}
 		keys['Space'] = false;
-	}
+	}/**/
 	//The camera's target will be the entity's position
-	camera_info.tar = Entities[controlIndex].pos;
-	 
-	camera_info.pos[0] += (camera_info.tar[0] - camera_info.pos[0]) * 0.05;
-	camera_info.pos[1] += (camera_info.tar[1] - camera_info.pos[1]) * 0.05;
+	//camera_info.tar = Entities[controlIndex].pos;
+	
+	//Adjust Camera's position
+	//camera_info.pos[0] += (camera_info.tar[0] - camera_info.pos[0]) * 0.05;
+	//camera_info.pos[1] += (camera_info.tar[1] - camera_info.pos[1]) * 0.05;
 }
 
 //Render all Entities
@@ -170,7 +179,7 @@ function render() {
 	gl.useProgram(programInfo.program);
 	gl.disable(gl.CULL_FACE);
 
-	/*
+	
 	Walls.forEach(function(entity, index, array) {
 		entity.render(view_matrix, proj_matrix);
 	});/**/
