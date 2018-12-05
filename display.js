@@ -1,22 +1,23 @@
 //Finish Importing Entities
-//new Entity(buffer, scale, position, rotation, color)
+//new Entity(buffer, scale, position, rotation)
+
+// NOTE ON TEXTURES (GABE): I deleted the color parameter for Entity!
 const ghost_buffer = ghost_generate(gl, twgl);
 Entities = [
-	//new Entity(pacman_generate(gl, twgl), .25, [-0.5, 0, 0], [1, 1, 0]),
-	new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0], [1, 0, 1]),
-	new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0], [0, 0, 1]),
-	new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0], [0, 1, 1]),
-	new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0], [0, 1, 0]),
-	new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0], [1, 1, 0]),
-	new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0], [1, 0, 0])
+	new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0]),
+	new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0]),
+	new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0]),
+	new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0]),
+	new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0]),
+	new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0])
 ];
 Walls = [
-	new Entity(pellet_generate(gl, twgl), 10, [ 4, 0, 0], [0,90,0], [1, 1, 1]),
-	new Entity(pellet_generate(gl, twgl), 10, [-4, 0, 0], [0,90,0], [1, 1, 1]),
-	new Entity(pellet_generate(gl, twgl), 10, [ 0, 4, 0], [90,0,0], [1, 1, 1]),
-	new Entity(pellet_generate(gl, twgl), 10, [ 0,-4, 0], [90,0,0], [1, 1, 1]),
-	new Entity(pellet_generate(gl, twgl), 10, [ 0, 0, 4], [0,0,0], [1, 1, 1]),
-	new Entity(pellet_generate(gl, twgl), 10, [ 0, 0,-4], [0,0,0], [1, 1, 1])
+	new Entity(pellet_generate(gl, twgl), 10, [ 4, 0, 0], [0,90,0]),
+	new Entity(pellet_generate(gl, twgl), 10, [-4, 0, 0], [0,90,0]),
+	new Entity(pellet_generate(gl, twgl), 10, [ 0, 4, 0], [90,0,0]),
+	new Entity(pellet_generate(gl, twgl), 10, [ 0,-4, 0], [90,0,0]),
+	new Entity(pellet_generate(gl, twgl), 10, [ 0, 0, 4], [0,0,0]),
+	new Entity(pellet_generate(gl, twgl), 10, [ 0, 0,-4], [0,0,0])
 ]
 
 var controlIndex = Entities.length-1;

@@ -20,12 +20,19 @@
 <script id="vs" type="notjs">
 	//Declare the Variables for each entity
 	attribute vec4 position;
+	attribute vec2 texcoord;
 	
 	uniform mat4 model_matrix;
 	uniform mat4 view_matrix;
 	uniform mat4 proj_matrix;
+	
+	varying vec2 v_texcoord;
+	
 	void main() {
 		gl_Position = proj_matrix * view_matrix * model_matrix * position;
+		
+		// Passes of texcoords to fragment shader.
+		v_texcoord = texcoord;
 	}
 	/*
 		position is the entity's position
@@ -47,17 +54,27 @@
 <script id="fs" type="notjs">
 	precision mediump float;
 
-	uniform vec3 color;
-
+	varying vec2 v_texcoord;
+	
+	uniform sampler2D u_texture;
+	
 	void main() {
-	    gl_FragColor = vec4(color, 1.0);
+	    // Instead of using color, gl_FragColor now uses u_texture.
+		gl_FragColor = texture2D(u_texture, v_texcoord);
 	}
 </script>
 
 <!-- import entity models -->
+
+
+
 <script src="ghost.js"></script>
-<script src="pacman.js"></script>
 <script src="pellet.js"></script>
+<script src="pacman.js"></script>
+
+	<!--
+<script src="texture-obj-test.js"></script>
+	-->
 
 <!-- game script -->
 <script src="init.js"></script>
