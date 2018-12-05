@@ -30,10 +30,10 @@ function update() {
 		Entities[controlIndex].pos[0] -= 0.05;
 	}
 	if (keys['KeyM']) {
-		Entities[controlIndex].pos[2] += 0.05;
+		Entities[controlIndex].pos[2] -= 0.05;
 	}
 	if (keys['KeyJ']) {
-		Entities[controlIndex].pos[2] -= 0.05;
+		Entities[controlIndex].pos[2] += 0.05;
 	}
 	
 	if (keys['KeyA']) {
@@ -58,7 +58,7 @@ function update() {
 		keys['Space'] = false;
 	}/**/
 	//The camera's target will be the entity's position
-	//camera_info.tar = Entities[controlIndex].pos;
+	camera_info.tar = Entities[controlIndex].pos;
 	
 	//Adjust Camera's position
 	//camera_info.pos[0] += (camera_info.tar[0] - camera_info.pos[0]) * 0.05;
