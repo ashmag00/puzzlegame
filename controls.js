@@ -9,7 +9,7 @@ document.addEventListener('keyup', function(e) {
 
 //Update all of the User-Control Operations
 function update() {
-	
+	/*
 	if (keys['KeyW']) {
 		camera_info.pos[2] += 0.05;
 	}
@@ -28,19 +28,28 @@ function update() {
 	if (keys['ShiftLeft']) {
 		camera_info.pos[1] -= 0.05;
 	}/**/
-	/*
+	
 	if (keys['ArrowUp']) {
-		Entities[controlIndex].pos[1] += 0.05;
+        rotated = rotateCameraX(camera_info,1);
+        console.log(rotated);
+		camera_info.tar = rotateCameraX(camera_info, -1);
 	}
 	if (keys['ArrowDown']) {
-		Entities[controlIndex].pos[1] -= 0.05;
+		rotated = rotateCameraX(camera_info,-1);
+        console.log(rotated);
+		camera_info.tar = rotateCameraX(camera_info, 1);
 	}
 	if (keys['ArrowLeft']) {
-		Entities[controlIndex].pos[0] += 0.05;
+		rotated = rotateCameraX(camera_info,1);
+        console.log(rotated);
+		camera_info.tar = rotateCameraY(camera_info, 1);
 	}
 	if (keys['ArrowRight']) {
-		Entities[controlIndex].pos[0] -= 0.05;
+		rotated = rotateCameraX(camera_info,1);
+        console.log(rotated);
+		camera_info.tar = rotateCameraY(camera_info, -1);
 	}
+    /*
 	if (keys['KeyM']) {
 		Entities[controlIndex].pos[2] -= 0.05;
 	}
@@ -70,7 +79,6 @@ function update() {
 		keys['Space'] = false;
 	}/**/
 	//The camera's target will be the entity's position
-	camera_info.tar = Entities[controlIndex].pos;
 	
 	//Adjust Camera's position
 	//camera_info.pos[0] += (camera_info.tar[0] - camera_info.pos[0]) * 0.05;

@@ -22,7 +22,7 @@ Walls = [
 
 var controlIndex = Entities.length-1;
 camera_info = {
-	pos: [0,-2,0],
+	pos: [0,0,0],
 	tar: [0,0,5],
 	up: [0,1,0],
 	fov: 60 * 3.14 / 180,
