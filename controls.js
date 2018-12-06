@@ -9,14 +9,26 @@ document.addEventListener('keyup', function(e) {
 
 //Update all of the User-Control Operations
 function update() {
-	/*
-	if (keys['ArrowLeft']) {
-		camera_info.tar[0] += 0.05;
-	}
-	if (keys['ArrowRight']) {
-		camera_info.tar[0] -= 0.05;
-	}*/
 	
+	if (keys['KeyW']) {
+		camera_info.pos[2] += 0.05;
+	}
+	if (keys['KeyS']) {
+		camera_info.pos[2] -= 0.05;
+	}
+	if (keys['KeyA']) {
+		camera_info.pos[0] += 0.05;
+	}
+	if (keys['KeyD']) {
+		camera_info.pos[0] -= 0.05;
+	}
+	if (keys['Space']) {
+		camera_info.pos[1] += 0.05;
+	}
+	if (keys['ShiftLeft']) {
+		camera_info.pos[1] -= 0.05;
+	}/**/
+	/*
 	if (keys['ArrowUp']) {
 		Entities[controlIndex].pos[1] += 0.05;
 	}

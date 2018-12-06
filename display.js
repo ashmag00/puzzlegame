@@ -12,12 +12,12 @@ Entities = [
 	new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0])
 ];
 Walls = [
-	new Entity(pellet_generate(gl, twgl), 10, [ 4, 0, 0], [0,90,0]),
-	new Entity(pellet_generate(gl, twgl), 10, [-4, 0, 0], [0,90,0]),
-	new Entity(pellet_generate(gl, twgl), 10, [ 0, 4, 0], [90,0,0]),
-	new Entity(pellet_generate(gl, twgl), 10, [ 0,-4, 0], [90,0,0]),
-	new Entity(pellet_generate(gl, twgl), 10, [ 0, 0, 4], [0,0,0]),
-	new Entity(pellet_generate(gl, twgl), 10, [ 0, 0,-4], [0,0,0])
+	new Entity(pellet_generate(gl, twgl), 25, [ 4, 0, 0], [0,90,0]),
+	new Entity(pellet_generate(gl, twgl), 25, [-4, 0, 0], [0,-90,0]),
+	new Entity(pellet_generate(gl, twgl), 25, [ 0, 4, 0], [-90,0,0]),
+	new Entity(pellet_generate(gl, twgl), 25, [ 0,-4, 0], [90,0,0]),
+	new Entity(pellet_generate(gl, twgl), 25, [ 0, 0, 4], [0,0,0]),
+	new Entity(pellet_generate(gl, twgl), 25, [ 0, 0,-4], [0,0,180])
 ]
 
 var controlIndex = Entities.length-1;
