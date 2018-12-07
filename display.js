@@ -9,15 +9,17 @@ Entities = [
 	//new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0]),
 	//new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0]),
 	//new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0]),
-	new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0])
+	new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0]),
+	new Entity(Table_generate(gl, twgl), 0.5, [0,-2,3], [90,90,90])
 ];
 Walls = [
+	/*
 	new Entity(pellet_generate(gl, twgl), 10, [ 4, 0, 0], [0,90,0]),
 	new Entity(pellet_generate(gl, twgl), 10, [-4, 0, 0], [0,-90,0]),
 	new Entity(pellet_generate(gl, twgl), 10, [ 0, 4, 0], [-90,0,0]),
 	new Entity(pellet_generate(gl, twgl), 10, [ 0,-4, 0], [90,0,0]),
 	new Entity(pellet_generate(gl, twgl), 10, [ 0, 0, 4], [0,0,0]),
-	new Entity(pellet_generate(gl, twgl), 10, [ 0, 0,-4], [0,0,180])
+	new Entity(pellet_generate(gl, twgl), 10, [ 0, 0,-4], [0,0,180])*/
 ]
 
 var controlIndex = Entities.length-1;
@@ -27,7 +29,8 @@ camera_info = {
 	up: [0,1,0],
 	fov: 60 * Math.PI / 180,
 	zNear: 0.1,
-	zFar: 100
+	zFar: 100,
+	rot: [0,0]
 };
 
 //Render all Entities
