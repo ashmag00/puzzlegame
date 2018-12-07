@@ -76,9 +76,9 @@ class Entity {
 function model_matrix(entity) {
 	var T = m4.translation(entity.pos[0], entity.pos[1], entity.pos[2]);
 	var S = m4.scaling(entity.scale, entity.scale, entity.scale);
-	var Rx = m4.xRotation(entity.rot[0]*3.14/180);
-	var Ry = m4.yRotation(entity.rot[1]*3.14/180);
-	var Rz = m4.zRotation(entity.rot[2]*3.14/180);
+	var Rx = m4.xRotation(entity.rot[0]*Math.PI/180);
+	var Ry = m4.yRotation(entity.rot[1]*Math.PI/180);
+	var Rz = m4.zRotation(entity.rot[2]*Math.PI/180);
 	var R = m4.multiply(Rz, m4.multiply(Rx, Ry))
 	return m4.multiply(T, m4.multiply(R, S));
 }

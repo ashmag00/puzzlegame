@@ -4,20 +4,20 @@
 // NOTE ON TEXTURES (GABE): I deleted the color parameter for Entity!
 const ghost_buffer = ghost_generate(gl, twgl);
 Entities = [
-	new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0]),
-	new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0]),
-	new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0]),
-	new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0]),
-	new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0]),
+	//new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0]),
+	//new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0]),
+	//new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0]),
+	//new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0]),
+	//new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0]),
 	new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0])
 ];
 Walls = [
-	new Entity(pellet_generate(gl, twgl), 25, [ 4, 0, 0], [0,90,0]),
-	new Entity(pellet_generate(gl, twgl), 25, [-4, 0, 0], [0,-90,0]),
-	new Entity(pellet_generate(gl, twgl), 25, [ 0, 4, 0], [-90,0,0]),
-	new Entity(pellet_generate(gl, twgl), 25, [ 0,-4, 0], [90,0,0]),
-	new Entity(pellet_generate(gl, twgl), 25, [ 0, 0, 4], [0,0,0]),
-	new Entity(pellet_generate(gl, twgl), 25, [ 0, 0,-4], [0,0,180])
+	new Entity(pellet_generate(gl, twgl), 10, [ 4, 0, 0], [0,90,0]),
+	new Entity(pellet_generate(gl, twgl), 10, [-4, 0, 0], [0,-90,0]),
+	new Entity(pellet_generate(gl, twgl), 10, [ 0, 4, 0], [-90,0,0]),
+	new Entity(pellet_generate(gl, twgl), 10, [ 0,-4, 0], [90,0,0]),
+	new Entity(pellet_generate(gl, twgl), 10, [ 0, 0, 4], [0,0,0]),
+	new Entity(pellet_generate(gl, twgl), 10, [ 0, 0,-4], [0,0,180])
 ]
 
 var controlIndex = Entities.length-1;
@@ -25,7 +25,7 @@ camera_info = {
 	pos: [0,0,0],
 	tar: [0,0,5],
 	up: [0,1,0],
-	fov: 60 * 3.14 / 180,
+	fov: 60 * Math.PI / 180,
 	zNear: 0.1,
 	zFar: 100
 };
