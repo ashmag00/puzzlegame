@@ -8,17 +8,7 @@ const programInfo = twgl.createProgramInfo(gl, ["vs", "fs"]);
 	only ONE sample texture with four colors, one row per color (R,G,B,A).
 	As it's currently set up, all entities will use this texture.
 */
-const tex = twgl.createTexture(gl, {
-		min: gl.NEAREST,
-		mag: gl.NEAREST,
-		
-		src: [
-			255, 0, 0, 255,		// BLINKY (RED)
-			255, 125, 125, 255,	// PINKY (PINK)
-			0, 255, 255, 255,	// INK (BLUE)
-			255, 255, 0, 255,	// CLYDE (ORANGE)
-		],
-	});
+
 
 //Create the Entity Class
 class Entity {
@@ -33,7 +23,18 @@ class Entity {
 		this.scale = pscale;
 		this.pos = ptranslate;
 		this.rot = protation;
+		this.tex = twgl.createTexture(gl, {	
+			min: gl.NEAREST,
+			mag: gl.NEAREST,
+			src: [
+				255, 0, 0, 255,		// BLINKY (RED)
+				255, 125, 125, 255,	// PINKY (PINK)
+				0, 255, 255, 255,	// INK (BLUE)
+				255, 255, 0, 255,	// CLYDE (ORANGE)
+			],
+		});
 	}
+	
 	
 	render(pview_matrix, pproj_matrix) {
 		/*
@@ -53,7 +54,7 @@ class Entity {
 			the fragment shader in index.html now uses "u_texture"
 			for gl_FragColor, not color.
 		*/
-			u_texture: tex,
+			u_texture: this.tex,
 		}
 		
 		twgl.setBuffersAndAttributes(gl, programInfo, this.buffer);
