@@ -2,14 +2,18 @@
 //new Entity(buffer, scale, position, rotation)
 
 // NOTE ON TEXTURES (GABE): I deleted the color parameter for Entity!
+
+
 const ghost_buffer = ghost_generate(gl, twgl);
+
+
 Entities = [
 	//new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0]),
 	//new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0]),
 	//new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0]),
 	//new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0]),
 	//new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0]),
-	//new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0]),
+	new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0]),
 	new Entity(Table_generate(gl, twgl), 0.5, [0,-2,3], [90,90,90], "./photos_2018_4_23_fst_rough-planks-texture-raw.jpg")
 ];
 Walls = [

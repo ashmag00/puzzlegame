@@ -26,7 +26,10 @@ class Entity {
 		this.texture = twgl.createTexture(gl, {
 			src: texFile,
 			mag: gl.NEAREST,
+			min: gl.NEAREST,
+			crossOrigin: "",
 		});
+		
 	}
 	
 	
