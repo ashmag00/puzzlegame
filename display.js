@@ -18,7 +18,7 @@ Walls = [
 	new Entity(pellet_generate(gl, twgl), 10, [-4, 0, 0], [0,-90,0]),
 	new Entity(pellet_generate(gl, twgl), 10, [ 0, 4, 0], [-90,0,0]),
 	new Entity(pellet_generate(gl, twgl), 10, [ 0,-4, 0], [90,0,0]),
-	new Entity(pellet_generate(gl, twgl), 10, [ 0, 0, 4], [0,0,0]),
+	//new Entity(pellet_generate(gl, twgl), 10, [ 0, 0, 4], [0,0,0]),
 	new Entity(pellet_generate(gl, twgl), 10, [ 0, 0,-4], [0,0,180])
 ]
 
