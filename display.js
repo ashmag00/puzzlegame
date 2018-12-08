@@ -9,17 +9,17 @@ Entities = [
 	//new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0]),
 	//new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0]),
 	//new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0]),
-	new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0]),
-	new Entity(Table_generate(gl, twgl), 0.5, [0,-2,3], [90,90,90])
+	//new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0]),
+	new Entity(Table_generate(gl, twgl), 0.5, [0,-2,3], [90,90,90], "./photos_2018_4_23_fst_rough-planks-texture-raw.jpg")
 ];
 Walls = [
 	
-	new Entity(pellet_generate(gl, twgl), 10, [ 4, 0, 0], [0,90,0]),
-	new Entity(pellet_generate(gl, twgl), 10, [-4, 0, 0], [0,-90,0]),
-	new Entity(pellet_generate(gl, twgl), 10, [ 0, 4, 0], [-90,0,0]),
-	new Entity(pellet_generate(gl, twgl), 10, [ 0,-4, 0], [90,0,0]),
-	//new Entity(pellet_generate(gl, twgl), 10, [ 0, 0, 4], [0,0,0]),
-	new Entity(pellet_generate(gl, twgl), 10, [ 0, 0,-4], [0,0,180])
+	//new Entity(pellet_generate(gl, twgl), 10, [ 4, 0, 0], [0,90,0]),
+	//new Entity(pellet_generate(gl, twgl), 10, [-4, 0, 0], [0,-90,0]),
+	//new Entity(pellet_generate(gl, twgl), 10, [ 0, 4, 0], [-90,0,0]),
+	//new Entity(pellet_generate(gl, twgl), 10, [ 0,-4, 0], [90,0,0]),
+	////new Entity(pellet_generate(gl, twgl), 10, [ 0, 0, 4], [0,0,0]),
+	//new Entity(pellet_generate(gl, twgl), 10, [ 0, 0,-4], [0,0,180])
 ]
 
 var controlIndex = Entities.length-1;
