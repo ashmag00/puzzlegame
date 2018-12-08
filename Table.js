@@ -4232,7 +4232,7 @@ function Table_generate(gl, twgl) {
             0.337875, 0.417962,
             0.352104, 0.417975,
         ],
-        normal: [
+	};
     const buffer = twgl.createBufferInfoFromArrays(gl, array);
     return buffer;
 }

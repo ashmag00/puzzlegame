@@ -18,20 +18,14 @@ class Entity {
 		texture information within the pbuffer when it is created.
 		// DELETED COLOR FROM THIS.
 	*/
-	constructor(pbuffer, pscale, ptranslate, protation) {
+	constructor(pbuffer, pscale, ptranslate, protation, texFile) {
 		this.buffer = pbuffer;
 		this.scale = pscale;
 		this.pos = ptranslate;
 		this.rot = protation;
-		this.tex = twgl.createTexture(gl, {	
-			min: gl.NEAREST,
+		this.texture = twgl.createTexture(gl, {
+			src: texFile,
 			mag: gl.NEAREST,
-			src: [
-				255, 0, 0, 255,		// BLINKY (RED)
-				255, 125, 125, 255,	// PINKY (PINK)
-				0, 255, 255, 255,	// INK (BLUE)
-				255, 255, 0, 255,	// CLYDE (ORANGE)
-			],
 		});
 	}
 	
@@ -54,7 +48,7 @@ class Entity {
 			the fragment shader in index.html now uses "u_texture"
 			for gl_FragColor, not color.
 		*/
-			u_texture: this.tex,
+			u_texture: this.texture,
 		}
 		
 		twgl.setBuffersAndAttributes(gl, programInfo, this.buffer);
