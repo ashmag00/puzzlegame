@@ -11,6 +11,7 @@ const programInfo = twgl.createProgramInfo(gl, ["vs", "fs"]);
 const tex = twgl.createTexture(gl, {
 		min: gl.NEAREST,
 		mag: gl.NEAREST,
+		
 		src: [
 			255, 0, 0, 255,		// BLINKY (RED)
 			255, 125, 125, 255,	// PINKY (PINK)
