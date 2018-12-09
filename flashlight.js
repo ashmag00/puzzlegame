@@ -3800,7 +3800,7 @@ function flashlight_generate(gl, twgl) {
             0.240254, 0.737143,
             0.260419, 0.722510,
         ],
-        normal: [
+    };
     const buffer = twgl.createBufferInfoFromArrays(gl, array);
     return buffer;
 }
