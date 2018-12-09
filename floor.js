@@ -32,7 +32,7 @@ function floor_generate(gl, twgl) {
             0.999900, 0.999900,
             0.000100, 0.999900,
         ],
-        normal: [
+	};
     const buffer = twgl.createBufferInfoFromArrays(gl, array);
     return buffer;
 }

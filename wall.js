@@ -32,7 +32,7 @@ function wall_generate(gl, twgl) {
             0.999927, 0.000073,
             0.999927, 0.535830,
         ],
-        normal: [
+	};
     const buffer = twgl.createBufferInfoFromArrays(gl, array);
     return buffer;
 }
