@@ -13,9 +13,9 @@ Entities = [
 	//new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0]),
 	//new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0]),
 	//new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0]),
-	new Entity(ghost_buffer, 0.25, [0, 0, 1], [0,0,0]),
+	new Entity(ghost_buffer, 0.25, [0, 0, 6], [0,0,0]),
 	new Entity(Table_generate(gl, twgl), 0.5, [0,-2,3], [90,90,90], "./photos_2018_4_23_fst_rough-planks-texture-raw.jpg"),
-	new Entity(flashlight_generate(gl, twgl), 0.2, [1,-1.5,1], [0,0,0], "./flashlight.jpeg")
+	new Entity(flashlight_generate(gl, twgl), 0.2, [0.5,-0.35,0.5], [0,0,0], "./flashlight.jpeg")
 ];
 Walls = [
 	new Entity(wall_generate(gl, twgl), 2, [  5, 0, 0], [0,0,0],  "./wall.jpeg"),		// LEFT WALL
@@ -41,7 +41,7 @@ camera_info = {
 	fov: 60 * Math.PI / 180,
 	zNear: 0.1,
 	zFar: 100,
-	rot: [0,0] //[X-Axis, Y-Axis]
+	rot: [0,0,0] //[X-Axis, Y-Axis, Z-Axis] (Z-Axis is irrelevant, except when adopting other objects)
 };
 
 //Render all Entities

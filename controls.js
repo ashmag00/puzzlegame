@@ -24,9 +24,18 @@ function update() {
 	//Stops the Camera from rotating fully about the X axis (no sumersaults for you)
 	camera_info.rot = enforcePerspectiveRestraint(camera_info.rot);
 	
-	camera_info.tar = rotateCameraX([0,0,5], camera_info.rot[0]);
+	camera_info.tar = rotateCameraX([0,0,3], camera_info.rot[0]);
 	camera_info.tar = rotateCameraY(camera_info.tar, camera_info.rot[1]);
+
+	//Entities[2].rot = rotateCameraX([0,0,3], camera_info.rot[0]);
+	//Entities[2].rot = rotateCameraY(Entities[2].rot, camera_info.rot[1]);
 	
 	//Render a Random ghost at the spot we're looking at
-	Entities[0].pos = camera_info.tar;
+	//Entities[0].pos = camera_info.tar;
+
+	//Make the Flashlight move
+	//console.log(camera_info.rot);
+	Entities[2].rot = camera_info.rot;
+	//Entities[2].pos = camera_info.tar;
+	//Entities[2].pos = translationVec3(camera_info.tar, [0.5,-0.3,-2.5]);
 }
