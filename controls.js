@@ -10,27 +10,23 @@ document.addEventListener('keyup', function(e) {
 //Update all of the User-Control Operations
 function update() {
 	if (keys['ArrowUp']) {
-		camera_info.tar = rotateCameraX(camera_info.tar, -1);
-		//camera_info.rot[1] += 1;
+		camera_info.rot[0] -= 1;
 	}
 	if (keys['ArrowDown']) {
-		camera_info.tar = rotateCameraX(camera_info.tar, 1);
-		//camera_info.rot[1] -= 1;
+		camera_info.rot[0] += 1;
 	}
 	if (keys['ArrowLeft']) {
-		camera_info.tar = rotateCameraY(camera_info.tar, 1);
-		//camera_info.rot[0] += 1;
+		camera_info.rot[1] += 1;
 	}
 	if (keys['ArrowRight']) {
-		camera_info.tar = rotateCameraY(camera_info.tar, -1);
-		//camera_info.rot[0] -= 1;
+		camera_info.rot[1] -= 1;
 	}
-	//camera_info.tar = rotateCameraX([0,0,0], camera_info.rot[0]);
-	//camera_info.tar = rotateCameraY([0,0,0], camera_info.rot[1]);
-	Entities[0].pos = camera_info.tar;
-	//The camera's target will be the entity's position
+	//Stops the Camera from rotating fully about the X axis (no sumersaults for you)
+	camera_info.rot = enforcePerspectiveRestraint(camera_info.rot);
 	
-	//Adjust Camera's position
-	//camera_info.pos[0] += (camera_info.tar[0] - camera_info.pos[0]) * 0.05;
-	//camera_info.pos[1] += (camera_info.tar[1] - camera_info.pos[1]) * 0.05;
+	camera_info.tar = rotateCameraX([0,0,5], camera_info.rot[0]);
+	camera_info.tar = rotateCameraY(camera_info.tar, camera_info.rot[1]);
+	
+	//Render a Random ghost at the spot we're looking at
+	Entities[0].pos = camera_info.tar;
 }
