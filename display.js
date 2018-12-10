@@ -28,7 +28,7 @@ camera_info = {
 	fov: 60 * Math.PI / 180,
 	zNear: 0.1,
 	zFar: 100,
-	rot: [0,0]
+	rot: [0,0] //[X-Axis, Y-Axis]
 };
 
 //Render all Entities
