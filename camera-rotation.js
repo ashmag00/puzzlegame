@@ -30,3 +30,12 @@ function enforcePerspectiveRestraint(cameraRotation) {
     }
     return cameraRotation;
 }/**/
+
+/*
+function translationVec3(original, translation) {
+    var done = [0,0,0]
+    done[0] = original[0] + translation[0];
+    done[1] = original[1] + translation[1];
+    done[2] = original[2] + translation[2];
+    return done;
+}/**/

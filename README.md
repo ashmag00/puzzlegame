@@ -1,8 +1,11 @@
 # puzzlegame
-Puzzle Game for COS350 final project
+Puzzle Game Tech Demo
+COS350 final project
+Fall 2018
+Taylor University
 
 # Credits
-Asher Gingrich
-Gabe Halmuth
-Noah F
+Asher Gingerich
+Gabe Helmuth
+Noah Frances
 Cordell King
