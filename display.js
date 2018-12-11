@@ -3,15 +3,15 @@
 
 // NOTE ON TEXTURES (GABE): I deleted the color parameter for Entity!
 
+
 //List of all Entities
 //Keep the Flashlight as "Entities[0]"
 Entities = [
-	new Entity(flashlight_generate(gl, twgl), 0.2, [1,-1.5,1], [0,0,0], "./textures/flashlight.jpeg"),
+	new Entity(flashlight_generate(gl, twgl), 0.2, [0.5,-0.3,0.5], [0,0,0], "./textures/flashlight.jpeg"),
 	new Entity(vase_generate(gl, twgl), 0.2, [-0.25,-2,3], [0,-90,-90], "./textures/vase.jpg"),
 	new Entity(Table_generate(gl, twgl), 0.5, [0,-2.25,3], [90,90,90], "./textures/photos_2018_4_23_fst_rough-planks-texture-raw.jpg"),
-	new Entity(ghost_generate(gl, twgl), 0.25, [-0.25,-1.25,3], [0,0,0],"./textures/flashlight.jpeg"),
-	new Entity(ghost_generate(gl, twgl), 0.25, [-0.25,-1.25,3], [0,90,0],"./textures/flashlight.jpeg"),
-	
+	//new Entity(ghost_generate(gl, twgl), 0.25, [-0.25,-1.25,3], [0,0,0],"./textures/flashlight.jpeg"),
+	//new Entity(ghost_generate(gl, twgl), 0.25, [-0.25,-1.25,3], [0,90,0],"./textures/flashlight.jpeg"),
 	
 	new Entity(shelf_generate(gl, twgl), 0.3, [4.6,-0.5,2], [0,-90,-90], "./textures/shelf.jpg"),
 	new Entity(shelf_generate(gl, twgl), 0.3, [4.6,-0.5,0], [0,-90,-90], "./textures/shelf.jpg"),
@@ -29,7 +29,6 @@ Walls = [
 	new Entity(floor_generate(gl, twgl), 1, [  0, -4, 0], [90,0,0],  "./textures/floor.jpeg"),	// FLOOR
 ]
 
-var controlIndex = Entities.length-1;
 camera_info = {
 	pos: [0,0,0],
 	tar: [0,0,0],
@@ -61,6 +60,15 @@ function render() {
 	Entities.forEach(function(entity, index, array) {
 		entity.render(view_matrix, proj_matrix);
 	});
+	//console.log(SWARM);
+	if (swarming) {
+		moveSWARM();
+	} else {
+		movehome();
+	}
+	SWARM.forEach(function(ghost, index, array) {
+		ghost.render(view_matrix, proj_matrix);
+	});/**/
 	
 	
 }
