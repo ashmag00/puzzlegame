@@ -3,17 +3,22 @@
 
 // NOTE ON TEXTURES (GABE): I deleted the color parameter for Entity!
 
+//Keep the Flashlight as Entities[0]
 Entities = [
 	//new Entity(ghost_buffer, 0.25, [0, 0, 4], [0,0,0]),
-
-	new Entity(ghost_generate(gl, twgl), 0.25, [0, 0, 1], [0,0,0],"./flashlight.jpeg"),
-	new Entity(Table_generate(gl, twgl), 0.5, [0,-2,3], [90,90,90], "./photos_2018_4_23_fst_rough-planks-texture-raw.jpg"),
+	new Entity(flashlight_generate(gl, twgl), 0.2, [1,-1.5,1], [0,0,0], "./flashlight.jpeg"),
+	new Entity(vase_generate(gl, twgl), 0.2, [-0.25,-2,3], [0,-90,-90], "./vase.jpg"),
+	new Entity(Table_generate(gl, twgl), 0.5, [0,-2.25,3], [90,90,90], "./photos_2018_4_23_fst_rough-planks-texture-raw.jpg"),
+	new Entity(ghost_generate(gl, twgl), 0.25, [-0.25,-1.25,3], [0,0,0],"./flashlight.jpeg"),
+	new Entity(ghost_generate(gl, twgl), 0.25, [-0.25,-1.25,3], [0,90,0],"./flashlight.jpeg"),
+	
+	
 	new Entity(shelf_generate(gl, twgl), 0.3, [4.6,-0.5,2], [0,-90,-90], "./shelf.jpg"),
 	new Entity(shelf_generate(gl, twgl), 0.3, [4.6,-0.5,0], [0,-90,-90], "./shelf.jpg"),
 	new Entity(shelf_generate(gl, twgl), 0.3, [4.6,-0.5,-2], [0,-90,-90], "./shelf.jpg"),
-	new Entity(shelf_generate(gl, twgl), 0.3, [2,-0.5,4.6], [90,180,0], "./shelf.jpg"),
-	new Entity(vase_generate(gl, twgl), 0.2, [-0.25,-1.75,3], [0,-90,-90], "./vase.jpg"),
-	new Entity(flashlight_generate(gl, twgl), 0.2, [1,-1.5,1], [0,0,0], "./flashlight.jpeg")
+	new Entity(shelf_generate(gl, twgl), 0.3, [2,-0.5,4.6], [90,180,0], "./shelf.jpg")
+	
+	
 
 ];
 Walls = [
@@ -29,7 +34,7 @@ Walls = [
 var controlIndex = Entities.length-1;
 camera_info = {
 	pos: [0,0,0],
-	tar: [0,0,5],
+	tar: [0,0,0],
 	up: [0,1,0],
 	fov: 60 * Math.PI / 180,
 	zNear: 0.1,
