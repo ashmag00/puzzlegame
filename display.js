@@ -18,6 +18,7 @@ Entities = [
 	new Entity(shelf_generate(gl, twgl), 0.3, [4.6,-0.5,-2], [0,-90,-90], "./textures/shelf.jpg"),
 	new Entity(shelf_generate(gl, twgl), 0.3, [2,-0.5,4.6], [90,180,0], "./textures/shelf.jpg")
 ];
+flashlight = Entities[0];
 //Building Structure
 Walls = [
 	//new Entity(pellet_generate(gl, twgl), 1, [ 4, 0, 0], [0,90,0], "./textures/photos_2018_4_23_fst_rough-planks-texture-raw.jpg"),
@@ -41,6 +42,13 @@ camera_info = {
 	viewrange: [-89,89] //The degrees of vertical view
 };
 
+function forward_dir(flashlight) {
+	var m = model_matrix(flashlight);
+	var d = [0,0,1];
+	var dt = m4.transformDirection(m, d);
+	return twgl.v3.normalize(dt);
+}
+
 //Render all Entities
 function render() {
 	twgl.resizeCanvasToDisplaySize(gl.canvas);
@@ -54,15 +62,38 @@ function render() {
 	gl.useProgram(programInfo.program); //???
 	gl.disable(gl.CULL_FACE); //Renders both sides of an object
 	gl.enable(gl.DEPTH_TEST); //Registers which objects are closer or further away
-
 	
+	//Flashlight
+	var view_direction = twgl.v3.subtract(camera_info.tar, camera_info.pos);
+	var view_direction = twgl.v3.normalize(view_direction);
+	
+	//Flashlight
+	// the light's origin is near the center of the flashlight.
+	// need to "push" the light_position forward just a bit, so
+	// that the flashlight does not illuminate itself
+	var light_direction = forward_dir(flashlight);
+	var light_position = twgl.v3.add(flashlight.pos, twgl.v3.mulScalar(light_direction, 0.25));
+	
+	//Flashlight
+	var uniforms = {
+		view_matrix: view_matrix,
+		proj_matrix: proj_matrix,
+		view_position: camera_info.pos,
+		light_position: light_position,
+		light_direction: light_direction,
+		light_cosangle: Math.cos(30 * Math.PI / 180),
+		light_bright: 5.0,
+		//light_direction: view_direction,
+		light_ambient: 0.1,
+	}
+	twgl.setUniforms(programInfo, uniforms);
+
 	Walls.forEach(function(entity, index, array) {
 		entity.render(view_matrix, proj_matrix);
 	});
 	Entities.forEach(function(entity, index, array) {
 		entity.render(view_matrix, proj_matrix);
 	});
-	//console.log(SWARM);
 	if (swarming) {
 		moveSWARM();
 	} else {

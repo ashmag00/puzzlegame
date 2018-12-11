@@ -31,13 +31,22 @@
 	uniform mat4 view_matrix;
 	uniform mat4 proj_matrix;
 	
+	//Flashlight
+	uniform mat4 model_invtrans_matrix;
+	varying vec4 v_position; 	// wrt world
+	varying vec3 v_normal;		// wrt world
 	varying vec2 v_texcoord;
+	attribute vec3 normal;
 	
 	void main() {
 		gl_Position = proj_matrix * view_matrix * model_matrix * position;
 		
 		// Passes of texcoords to fragment shader.
 		v_texcoord = texcoord;
+		
+		//Flashlight
+		v_position = model_matrix * position;
+		v_normal = mat3(model_invtrans_matrix) * normal;
 	}
 	/*
 		position is the entity's position
@@ -63,9 +72,31 @@
 	
 	uniform sampler2D u_texture;
 	
+	//Flashlight
+	varying vec4 v_position; 	// wrt world
+	varying vec3 v_normal;		// wrt world
+	uniform vec3 view_position; 	// wrt world
+	uniform vec3 light_position;	// wrt world
+	uniform vec3 light_direction; 	// wrt world
+	uniform float light_cosangle;	// cosine of angle
+	uniform float light_bright;
+	uniform float light_ambient;
+	
 	void main() {
 	    // Instead of using color, gl_FragColor now uses u_texture.
 		gl_FragColor = texture2D(u_texture, v_texcoord);
+		
+		//Flashlight
+		// only handling diffuse lighting
+		vec3 lightdir = normalize(light_position - v_position.xyz / v_position.w);
+		float lightdist = length(light_position - v_position.xyz / v_position.w);
+		vec3 viewdir = normalize(view_position - v_position.xyz / v_position.w);
+		float viewdist = length(view_position - v_position.xyz / v_position.w);
+		float light = 0.0;
+		if(dot(lightdir, -light_direction) > light_cosangle) {
+			light = light_bright * abs(dot(v_normal, lightdir.xyz)) / pow(lightdist, 2.0);
+		}
+		gl_FragColor.rgb *= light + light_ambient;
 	}
 </script>
 

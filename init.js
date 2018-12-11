@@ -32,7 +32,15 @@ class Entity {
 		
 	}
 	
-	
+	//Flashlight
+	/*
+	forward_dir() {
+		var m = model_matrix(this);
+		var d = [0,0,1];
+		var dt = m4.transformDirection(m, d);
+		return twgl.v3.normalize(dt);
+	}//*/
+
 	render(pview_matrix, pproj_matrix) {
 		/*
 		var uniforms = {
@@ -40,6 +48,7 @@ class Entity {
 			translate: this.pos,
 			color: this.color
 		}/**/
+		/* Pre-Flashlight
 		var uniforms = {
 			view_matrix: pview_matrix,
 			proj_matrix: pproj_matrix,
@@ -50,8 +59,14 @@ class Entity {
 			NOTE (GABE): I commented out the "color" line since
 			the fragment shader in index.html now uses "u_texture"
 			for gl_FragColor, not color.
-		*/
+		*//*
 			u_texture: this.texture,
+		}/**/
+		var m = model_matrix(this);
+		var uniforms = {
+			model_matrix: m,
+			model_invtrans_matrix: m4.inverse(m4.transpose(m)),
+			u_texture: this.texture
 		}
 		
 		twgl.setBuffersAndAttributes(gl, programInfo, this.buffer);

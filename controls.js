@@ -47,7 +47,7 @@ function update() {
 	//Entities[3].pos = camera_info.tar;
 
 	//Make the Flashlight move
-	//Entities[0].rot = camera_info.rot;
+	flashlight.rot = camera_info.rot;
 
 	//These things happen 60 times every second
 	Entities[1].rot[0] -= 1;
