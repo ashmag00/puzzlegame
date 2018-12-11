@@ -33,9 +33,6 @@ function update() {
 	
 	camera_info.tar = rotateCameraX([0,0,3], camera_info.rot[0]);
 	camera_info.tar = rotateCameraY(camera_info.tar, camera_info.rot[1]);
-
-	//Entities[0].rot = rotateCameraX([0,0,3], camera_info.rot[0]);
-	//Entities[0].rot = rotateCameraY(Entities[2].rot, camera_info.rot[1]);
 	
 	//Render a Random ghost at the spot we're looking at
 	//Entities[3].pos = camera_info.tar;
@@ -43,7 +40,8 @@ function update() {
 	//Make the Flashlight move
 	//console.log(camera_info.rot);
 	Entities[0].rot = camera_info.rot;
-	Entities[1].rot[0] += 1;
+	//These things happen 60 times every second
+	Entities[1].rot[0] -= 1;
 	Entities[3].rot[1] += 1;
 	Entities[4].rot[1] += 1;
 	//Entities[0].pos = camera_info.tar;
