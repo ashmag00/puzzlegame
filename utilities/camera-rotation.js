@@ -39,3 +39,16 @@ function translationVec3(original, translation) {
     done[2] = original[2] + translation[2];
     return done;
 }/**/
+
+function LookAt(location, target) {
+	//var degrees = Math.atan(location[0],location[1])
+	//rotation = [X-Axis(left),Y-Axis(down),Z-Axis(who cares?)]
+	var yRot = (-Math.atan(target[2]/target[0]))+(Math.PI/2);
+	if (target[0] < 0) {
+		yRot += Math.PI;
+	}
+	var xRot = -Math.atan(target[1]/target[2]);
+	//console.log([target[1], target[2]], yRot);
+	var rotation = [xRot*180/Math.PI,yRot*180/Math.PI,0]
+	return rotation;
+}

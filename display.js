@@ -38,7 +38,7 @@ camera_info = {
 	zNear: 0.1,
 	zFar: 100,
 	rot: [0,0,0], //[X-Axis, Y-Axis, Z-Axis] (Z-Axis is irrelevant, except when adopting other objects)
-	starttar: [0,0,3], //Where the Target is transformed from
+	starttar: [0,0,1], //Where the Target is transformed from
 	viewrange: [-89,89] //The degrees of vertical view
 };
 
