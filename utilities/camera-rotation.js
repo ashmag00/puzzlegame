@@ -23,10 +23,10 @@ function rotateCameraZ(tar, degrees) {
 
 //Stops the Camera from rotating fully about the X axis (no sumersaults for you)
 function enforcePerspectiveRestraint(cameraRotation) {
-    if (cameraRotation[0] > 89) {
-        cameraRotation[0] = 89;
-    } else if (cameraRotation[0] < -89) {
-        cameraRotation[0] = -89;
+    if (cameraRotation[0] > camera_info.viewrange[1]) {
+        cameraRotation[0] = camera_info.viewrange[1];
+    } else if (cameraRotation[0] < camera_info.viewrange[0]) {
+        cameraRotation[0] = camera_info.viewrange[0];
     }
     return cameraRotation;
 }/**/

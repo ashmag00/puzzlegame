@@ -36,7 +36,9 @@ camera_info = {
 	fov: 60 * Math.PI / 180,
 	zNear: 0.1,
 	zFar: 100,
-	rot: [0,0,0] //[X-Axis, Y-Axis, Z-Axis] (Z-Axis is irrelevant, except when adopting other objects)
+	rot: [0,0,0], //[X-Axis, Y-Axis, Z-Axis] (Z-Axis is irrelevant, except when adopting other objects)
+	starttar: [0,0,3], //Where the Target is transformed from
+	viewrange: [-89,89] //The degrees of vertical view
 };
 
 //Render all Entities

@@ -9,10 +9,17 @@ document.addEventListener('keydown', function(e) {
 		} else {
 			swarming = true;
 		}
+	} else if (e.code == 'ShiftLeft') {
+		camera_info.pos = [0,-3,0];
+		Entities[0].pos = [0.5,-3.3,0.5];
 	}
 });
 document.addEventListener('keyup', function(e) {
 	keys[e.code] = false;
+	if (e.code == 'ShiftLeft') {
+		camera_info.pos = [0,0,0];
+		Entities[0].pos = [0.5,-0.3,0.5];
+	}
 });
 
 //Update all of the User-Control Operations
@@ -29,17 +36,11 @@ function update() {
 	if (keys['ArrowRight']) {
 		camera_info.rot[1] -= 1;
 	}
-	if (keys['ShiftLeft']) {
-		camera_info.pos = [0,-3,0];
-		Entities[0].pos = [0.5,-3.3,0.5];
-	} else {
-		camera_info.pos = [0,0,0];
-		Entities[0].pos = [0.5,-0.3,0.5];
-	}
+	
 	//Stops the Camera from rotating fully about the X axis (no sumersaults for you)
 	camera_info.rot = enforcePerspectiveRestraint(camera_info.rot);
 	
-	camera_info.tar = rotateCameraX([0,0,3], camera_info.rot[0]);
+	camera_info.tar = rotateCameraX(camera_info.starttar, camera_info.rot[0]);
 	camera_info.tar = rotateCameraY(camera_info.tar, camera_info.rot[1]);
 	
 	//Render a Random ghost at the spot we're looking at
