@@ -32,7 +32,7 @@ function move(ghost, dir) {
 	ghost.pos[2] += ghost.dir[2]*dir;
 	ghost.rot[1] += ghost.dir[1]*90*dir;
 		
-	if (Math.sqrt(Math.pow(ghost.pos[0], 2) + Math.pow(ghost.pos[0], 2) + Math.pow(ghost.pos[0], 2)) > 9) {
+	if (distance(ghost, [0,0,0]) > 9) {
 		ghost.pos = [ghost.pos[0]*-1,ghost.pos[1]*-1,ghost.pos[2]*-1]
 	}
 }
@@ -45,9 +45,12 @@ function movehome() {
 	});
 }
 function home(ghost) {
-	if (ghost.pos[0] + 0.25 < 0.05 && ghost.pos[1] + 2 < 0.05 && ghost.pos[2] - 3 < 0.05) {
+	if (distance(ghost, [-0.25,-2,3]) < .25) {
 		ghost.pos = [-0.25,-2,3];
 		return true;
 	}
 	return false;
+}
+function distance(ghost, point) {
+	return Math.sqrt(Math.pow((ghost.pos[0]-point[0]), 2) + Math.pow((ghost.pos[1]-point[1]), 2) + Math.pow((ghost.pos[2]-point[2]), 2));
 }

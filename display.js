@@ -7,7 +7,7 @@
 //List of all Entities
 //Keep the Flashlight as "Entities[0]"
 Entities = [
-	new Entity(flashlight_generate(gl, twgl), 0.2, [0.5,-0.3,0.5], [0,0,0], "./textures/flashlight.jpeg"),
+	new Entity(flashlight_generate(gl, twgl), 0.2, [0.5,-0.3,0.3], [0,0,0], "./textures/flashlight.jpeg"),
 	new Entity(vase_generate(gl, twgl), 0.2, [-0.25,-2,3], [0,-90,-90], "./textures/vase.jpg"),
 	new Entity(Table_generate(gl, twgl), 0.5, [0,-2.25,3], [90,90,90], "./textures/photos_2018_4_23_fst_rough-planks-texture-raw.jpg"),
 	//new Entity(ghost_generate(gl, twgl), 0.25, [-0.25,-1.25,3], [0,0,0],"./textures/flashlight.jpeg"),

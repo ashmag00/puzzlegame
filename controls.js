@@ -11,29 +11,29 @@ document.addEventListener('keydown', function(e) {
 		}
 	} else if (e.code == 'ShiftLeft') {
 		camera_info.pos = [0,-3,0];
-		Entities[0].pos = [0.5,-3.3,0.5];
+		Entities[0].pos = [0.5,-3.3,0.3];
 	}
 });
 document.addEventListener('keyup', function(e) {
 	keys[e.code] = false;
 	if (e.code == 'ShiftLeft') {
 		camera_info.pos = [0,0,0];
-		Entities[0].pos = [0.5,-0.3,0.5];
+		Entities[0].pos = [0.5,-0.3,0.3];
 	}
 });
 
 //Update all of the User-Control Operations
 function update() {
-	if (keys['ArrowUp']) {
+	if (keys['ArrowUp'] || keys['KeyW']) {
 		camera_info.rot[0] -= 1;
 	}
-	if (keys['ArrowDown']) {
+	if (keys['ArrowDown'] || keys['KeyS']) {
 		camera_info.rot[0] += 1;
 	}
-	if (keys['ArrowLeft']) {
+	if (keys['ArrowLeft'] || keys['KeyA']) {
 		camera_info.rot[1] += 1;
 	}
-	if (keys['ArrowRight']) {
+	if (keys['ArrowRight'] || keys['KeyD']) {
 		camera_info.rot[1] -= 1;
 	}
 	
