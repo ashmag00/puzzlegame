@@ -41,7 +41,7 @@ class Entity {
 		return twgl.v3.normalize(dt);
 	}//*/
 
-	render(pview_matrix, pproj_matrix) {
+	render() {
 		/*
 		var uniforms = {
 			scale: this.scale,

@@ -5,9 +5,9 @@
 
 
 //List of all Entities
-//Keep the Flashlight as "Entities[0]"
+//Keep the Vase as "Entities[0]"
+flashlight = new Entity(flashlight_generate(gl, twgl), 0.2, [0.5,-0.3,0.3], [0,0,0], "./textures/flashlight.jpeg")
 Entities = [
-	new Entity(flashlight_generate(gl, twgl), 0.2, [0.5,-0.3,0.3], [0,0,0], "./textures/flashlight.jpeg"),
 	new Entity(vase_generate(gl, twgl), 0.2, [-0.25,-2,3], [0,-90,-90], "./textures/vase.jpg"),
 	new Entity(Table_generate(gl, twgl), 0.5, [0,-2.25,3], [90,90,90], "./textures/photos_2018_4_23_fst_rough-planks-texture-raw.jpg"),
 	//new Entity(ghost_generate(gl, twgl), 0.25, [-0.25,-1.25,3], [0,0,0],"./textures/flashlight.jpeg"),
@@ -16,9 +16,9 @@ Entities = [
 	new Entity(shelf_generate(gl, twgl), 0.3, [4.6,-0.5,2], [0,-90,-90], "./textures/shelf.jpg"),
 	new Entity(shelf_generate(gl, twgl), 0.3, [4.6,-0.5,0], [0,-90,-90], "./textures/shelf.jpg"),
 	new Entity(shelf_generate(gl, twgl), 0.3, [4.6,-0.5,-2], [0,-90,-90], "./textures/shelf.jpg"),
-	new Entity(shelf_generate(gl, twgl), 0.3, [2,-0.5,4.6], [90,180,0], "./textures/shelf.jpg")
+	new Entity(shelf_generate(gl, twgl), 0.3, [2,-0.5,4.6], [90,180,0], "./textures/shelf.jpg"),
+	flashlight
 ];
-flashlight = Entities[0];
 //Building Structure
 Walls = [
 	//new Entity(pellet_generate(gl, twgl), 1, [ 4, 0, 0], [0,90,0], "./textures/photos_2018_4_23_fst_rough-planks-texture-raw.jpg"),
@@ -56,7 +56,8 @@ function render() {
 	
 	//Create the matrixes
 	const aspect = canvas.clientWidth / canvas.clientHeight;
-	const view_matrix = m4.inverse(m4.lookAt(camera_info.pos, camera_info.tar, camera_info.up));
+	const camera_matrix = m4.lookAt(camera_info.pos, camera_info.tar, camera_info.up)
+	//const view_matrix = m4.inverse(camera_matrix);
 	const proj_matrix = m4.perspective(camera_info.fov, aspect, camera_info.zNear, camera_info.zFar);
 	
 	gl.useProgram(programInfo.program); //???
@@ -76,7 +77,7 @@ function render() {
 	
 	//Flashlight
 	var uniforms = {
-		view_matrix: view_matrix,
+		view_matrix: m4.inverse(camera_matrix),
 		proj_matrix: proj_matrix,
 		view_position: camera_info.pos,
 		light_position: light_position,
@@ -89,10 +90,10 @@ function render() {
 	twgl.setUniforms(programInfo, uniforms);
 
 	Walls.forEach(function(entity, index, array) {
-		entity.render(view_matrix, proj_matrix);
+		entity.render();
 	});
 	Entities.forEach(function(entity, index, array) {
-		entity.render(view_matrix, proj_matrix);
+		entity.render();
 	});
 	if (swarming) {
 		moveSWARM();
@@ -100,8 +101,9 @@ function render() {
 		movehome();
 	}
 	SWARM.forEach(function(ghost, index, array) {
-		ghost.render(view_matrix, proj_matrix);
+		ghost.render();
 	});/**/
+	//flashlight.render(camera_matrix);
 	
 	
 }

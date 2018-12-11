@@ -63,9 +63,9 @@ function update() {
 	//flashlight.rot = enforcePerspectiveRestraint(flashlight.rot);
 	//flashlight.tar = rotateCameraX(camera_info.starttar, flashlight.rot[0]);
 	//flashlight.tar = rotateCameraY(flashlight.tar, flashlight.rot[1]);
-	flashlight.rot = LookAt(flashlight.pos, camera_info.tar);
+	//flashlight.rot = LookAt(flashlight.pos, camera_info.tar);
 	//console.log(LookAt(flashlight.pos, camera_info.tar));
 
 	//These things happen 60 times every second
-	Entities[1].rot[0] -= 1;
+	Entities[0].rot[0] -= 1;
 }
